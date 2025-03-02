@@ -1,0 +1,7 @@
+{
+    "SupaBaseConfig": {
+        "ProjectUrl": "https://yciqpnhvhydrilamhzpz.supabase.co",
+        "AnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InljaXFwbmh2aHlkcmlsYW1oenB6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAyMjg1NDQsImV4cCI6MjA1NTgwNDU0NH0.T-ougTjC7MAidN-S8vtO2jxh5vJKy7gbss2Bez5CEPE",
+        "RefreshTokenTriggerInMs": 3000000
+    }
+}
