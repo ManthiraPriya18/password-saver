@@ -3,6 +3,8 @@ import { appconfig } from "../../main";
 import { AppDispatch } from "../../redux/store";
 import { IUserData, removeUserData, setUserData } from "../../redux/actions/useractions";
 import { DeleteUserDataInLocalStorage, SetUserDataInLocalStorage } from "../localstorage/localstorage";
+import { PasswordTable } from "./supabaseconstant";
+import { ISavePassword } from "../../components/common/interface/interfaces";
 let supabase: SupabaseClient | undefined;
 let refreshInterval: any;
 async function getSupabaseClient(): Promise<SupabaseClient> {
@@ -117,6 +119,52 @@ export async function LoginUser(email: string, password: string, dispatch: AppDi
         setupSessionRefresh(dispatch);
         return true;
     } catch (error) {
+        console.error('Failed to login user', error);
+        return false;
+    }
+}
+
+export async function SavePassword(data: ISavePassword): Promise<boolean> {
+    try {
+        let supabaseClient = await getSupabaseClient();
+        if (supabaseClient == undefined) {
+            console.error('Supabase client not initialized');
+            return false;
+        }
+        const { error } = await supabaseClient.from(PasswordTable.TableName).insert({
+            [PasswordTable.UserName]: data.UserName,
+            [PasswordTable.Password]: data.Password,
+            [PasswordTable.Salt]: data.Salt,
+            [PasswordTable.Desc]: data.Desc,
+            [PasswordTable.CreatedAt]: data.CreatedAt,
+            [PasswordTable.ModifiedAt]: data.ModifiedAt,
+        })
+        if (error) {
+            console.log("Error while inserting ", error)
+            return false;
+        }
+        return true;
+
+    }
+    catch (error) {
+        console.error('Failed to login user', error);
+        return false;
+    }
+}
+
+export async function GetPasswordFromSupabase(){
+    try {
+        let supabaseClient = await getSupabaseClient();
+        if (supabaseClient == undefined) {
+            console.error('Supabase client not initialized');
+            return false;
+        }
+        const {data} = await supabaseClient.from(PasswordTable.TableName).select("*")
+        console.log(data)
+        return true;
+
+    }
+    catch (error) {
         console.error('Failed to login user', error);
         return false;
     }

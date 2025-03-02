@@ -5,10 +5,10 @@ import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom
 import { LoginPage } from './components/loginpage/loginpage'
 import { PasswordViewerPage } from './components/passwordpage/passwordviewerpage'
 import { Provider } from 'react-redux'
-import store, { RootState } from './redux/store'
+import store from './redux/store'
 import { GetUserDataFromLocalStorage } from './services/localstorage/localstorage'
 import { LogoutUser } from './services/supabase/supabase'
-import { useAppDispatch, useAppSelector } from './redux/reduxhooks'
+import { useAppDispatch } from './redux/reduxhooks'
 
 export let appconfig: AppConfig;
 const loadConfig = async () => {
